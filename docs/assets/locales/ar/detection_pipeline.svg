@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="detBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a14"/>
+      <stop offset="50%" stop-color="#0b1324"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+    <linearGradient id="pBox1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="940" height="420" rx="14" fill="url(#detBg)"/>
+  <rect x="0.5" y="0.5" width="939" height="419" rx="13.5" fill="none" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Title Header -->
+  <text x="470" y="38" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="900" letter-spacing="-0.5">
+    batch-forensics-and-ghidra-re : خط أنابيب الكشف EDR/SIEM للفريق الأزرق
+  </text>
+  <text x="470" y="62" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+    استيعاب السجلات تلقائياً ← معالجة AST ← تقييم 52 قاعدة سيغما و 32 قاعدة يارا ← تنبيهات SOC
+  </text>
+
+  <!-- 1. Log Ingestion -->
+  <g transform="translate(30, 92)">
+    <rect width="195" height="290" rx="8" fill="url(#pBox1)" stroke="#3b82f6" stroke-width="1.2"/>
+    <rect width="195" height="34" rx="8" fill="#1d4ed8"/>
+    <rect y="26" width="195" height="8" fill="#1d4ed8"/>
+    <text x="97" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      1. استيعاب السجلات
+    </text>
+    <g transform="translate(12, 52)" font-family="Consolas, monospace" font-size="10.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#60a5fa">• Sysmon Event ID 1</text>
+      <text x="0" y="16" fill="#94a3b8">  (إنشاء العمليات)</text>
+      <text x="0" y="44" font-weight="bold" fill="#60a5fa">• Security 4688</text>
+      <text x="0" y="60" fill="#94a3b8">  (تتبع العمليات)</text>
+      <text x="0" y="88" font-weight="bold" fill="#60a5fa">• PowerShell EID 4104</text>
+      <text x="0" y="104" fill="#94a3b8">  (تسجيل الكتل البرمجية)</text>
+      <text x="0" y="132" font-weight="bold" fill="#60a5fa">• تدفقات بيانات EDR</text>
+      <text x="0" y="148" fill="#94a3b8">  (كراودسترايك / ديفندر)</text>
+      <text x="0" y="176" font-weight="bold" fill="#60a5fa">• مسح الملفات (القرص/الذاكرة)</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(230, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#38bdf8" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#38bdf8"/>
+  </g>
+
+  <!-- 2. AST Normalization Engine -->
+  <g transform="translate(260, 92)">
+    <rect width="195" height="290" rx="8" fill="url(#pBox1)" stroke="#06b6d4" stroke-width="1.2"/>
+    <rect width="195" height="34" rx="8" fill="#0e7490"/>
+    <rect y="26" width="195" height="8" fill="#0e7490"/>
+    <text x="97" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      2. مفكك الرموز AST
+    </text>
+    <g transform="translate(12, 52)" font-family="Consolas, monospace" font-size="10.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#22d3ee">• فحص BOM المتعدد</text>
+      <text x="0" y="16" fill="#94a3b8">  (UTF-16LE 0xFF 0xFE)</text>
+      <text x="0" y="44" font-weight="bold" fill="#22d3ee">• معالجة رمز Caret (^)</text>
+      <text x="0" y="60" fill="#94a3b8">  (محرك علامات الاقتباس)</text>
+      <text x="0" y="88" font-weight="bold" fill="#22d3ee">• استخراج المتغيرات %VAR%</text>
+      <text x="0" y="104" fill="#94a3b8">  (توسيع :~offset,length)</text>
+      <text x="0" y="132" font-weight="bold" fill="#22d3ee">• تفكيك الفواصل</text>
+      <text x="0" y="148" fill="#94a3b8">  (المسافات، الفواصل، =)</text>
+      <text x="0" y="176" font-weight="bold" fill="#22d3ee">• التوسيع المؤجل (!VAR!)</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(460, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#06b6d4" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#06b6d4"/>
+  </g>
+
+  <!-- 3. Dual Detection Engine -->
+  <g transform="translate(490, 92)">
+    <rect width="195" height="290" rx="8" fill="url(#pBox1)" stroke="#f59e0b" stroke-width="1.2"/>
+    <rect width="195" height="34" rx="8" fill="#b45309"/>
+    <rect y="26" width="195" height="8" fill="#b45309"/>
+    <text x="97" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      3. قواعد الكشف
+    </text>
+    <g transform="translate(12, 52)" font-family="Consolas, monospace" font-size="10.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#fbbf24">• 52 قاعدة سيغما</text>
+      <text x="0" y="16" fill="#94a3b8">  (التسلل، التنفيذ، الاستمرار)</text>
+      <text x="0" y="44" font-weight="bold" fill="#fbbf24">• 32 توقيع يارا</text>
+      <text x="0" y="60" fill="#94a3b8">  (أدوات التشويش، الحزم)</text>
+      <text x="0" y="88" font-weight="bold" fill="#fbbf24">• قياس إنتروبيا شانون</text>
+      <text x="0" y="104" fill="#94a3b8">  (تقييم العتبة الإحصائية)</text>
+      <text x="0" y="132" font-weight="bold" fill="#fbbf24">• تنبيه كثافة الكاريت</text>
+      <text x="0" y="148" fill="#94a3b8">  (النسبة > 0.15)</text>
+      <text x="0" y="176" font-weight="bold" fill="#fbbf24">• 15 خريطة MITRE ATT&CK</text>
+    </g>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <g transform="translate(690, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#f59e0b" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#f59e0b"/>
+  </g>
+
+  <!-- 4. SIEM / SOC Triage -->
+  <g transform="translate(720, 92)">
+    <rect width="190" height="290" rx="8" fill="url(#pBox1)" stroke="#10b981" stroke-width="1.2"/>
+    <rect width="190" height="34" rx="8" fill="#047857"/>
+    <rect y="26" width="190" height="8" fill="#047857"/>
+    <text x="95" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      4. فرز SIEM / SOC
+    </text>
+    <g transform="translate(12, 52)" font-family="Consolas, monospace" font-size="10.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#34d399">• استعلامات Splunk SPL</text>
+      <text x="0" y="16" fill="#94a3b8">  (عمليات بحث إنتاجية)</text>
+      <text x="0" y="44" font-weight="bold" fill="#34d399">• استعلامات Elastic KQL</text>
+      <text x="0" y="60" fill="#94a3b8">  (تنبيهات إيلاستيك)</text>
+      <text x="0" y="88" font-weight="bold" fill="#34d399">• تصنيف الخطورة التلقائي</text>
+      <text x="0" y="104" fill="#94a3b8">  (LOW / MED / HIGH / CRITICAL)</text>
+      <text x="0" y="132" font-weight="bold" fill="#34d399">• تصفية الإنذارات الكاذبة</text>
+      <text x="0" y="148" fill="#94a3b8">  (تحليل آمن بالذاكرة)</text>
+      <text x="0" y="176" font-weight="bold" fill="#34d399">• كتيبات الاستجابة للحوادث</text>
+    </g>
+  </g>
+</svg>
