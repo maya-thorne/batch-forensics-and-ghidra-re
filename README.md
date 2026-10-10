@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/hero.svg" alt="batch-forensics-and-ghidra-re banner" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/hero.svg" alt="batch-forensics-and-ghidra-re banner" width="100%" /></a>
 </p>
 
 # 🛡️ batch-forensics-and-ghidra-re
@@ -44,7 +44,7 @@ This repository is an **enterprise-grade defensive security engineering lab and 
 ## 🏗️ Blue Team EDR/SIEM Detection Pipeline
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
 
 ```mermaid
@@ -84,7 +84,7 @@ flowchart LR
 ## 💻 Interactive Parser Simulator Live Demo
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
 
 ---
@@ -151,7 +151,7 @@ python -m unittest discover tests
 ```python
 from src.entropy_detector import analyze_script_telemetry
 
-with open("samples/parser-test-vectors/01_env_slicing_sample.bat", "rb") as f:
+with open("tests/samples/parser-test-vectors/01_env_slicing_sample.bat", "rb") as f:
     result = analyze_script_telemetry(f.read())
 
 print(f"Shannon Entropy : {result.shannon_entropy}")
@@ -166,41 +166,21 @@ print(f"Anomalies       : {result.triggered_anomalies}")
 
 ```text
 batch-forensics-and-ghidra-re/
-├── assets/
-│   ├── hero.svg                                 # Master dark terminal SVG banner
-│   ├── detection_pipeline.svg                   # Blue Team EDR/SIEM detection pipeline
-│   ├── architecture.svg                         # 3-tier forensic architecture diagram
-│   ├── demo_parser_terminal.svg                 # Animated live terminal execution SVG
-│   └── locales/                                 # 10-language localized SVG banners & diagrams
-├── docs/
-│   ├── MITRE_ATTACK_DEFENSE_MATRIX.md           # Formal MITRE ATT&CK 15-technique matrix
-│   ├── 01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md   # Primary Ghidra RE whitepaper
-│   ├── 02_CLASSIC_TO_MODERN_EVOLUTION_1990_2026.md          # 30-year evolution whitepaper
-│   ├── 03_BATCLOAK_MULTI_STAGE_LOADER_FORENSICS.md          # BatCloak forensic analysis
-│   ├── 04_BATCH_OBFUSCATION_ENCYCLOPEDIA.md                 # Taxonomy encyclopedia
-│   ├── 05_BATCH_OBFUSCATION_MASTER_GUIDE.md                 # Detection & triage guide
-│   └── locales/                                 # 9 translated documentation summaries
-├── rules/
-│   ├── sigma/                                   # 52 Modular Production Sigma Rules
-│   │   ├── defense_evasion/                     # 24 Rules (Carets, Slicing, Delimiters)
-│   │   ├── execution/                           # 12 Rules (Pipes, Encoded PS, Looping)
-│   │   ├── discovery/                           # 10 Rules (Anti-VM, Recon, Debugger Scan)
-│   │   └── persistence/                         # 6 Rules (Run Keys, Services, AppInit)
-│   ├── yara/                                    # 32 Modular Production YARA Signatures
-│   │   ├── obfuscators/                         # 12 Rules (BatCloak, Somali, 0xidiz3r)
-│   │   ├── packers/                             # 10 Rules (Bat2Exe UPX/VB6/.NET/Bytepress)
-│   │   └── heuristics/                          # 10 Rules (Caret Density, Hex Pipes)
-│   └── siem_queries/                            # Turnkey SIEM Query Feeds
-│       ├── splunk_queries.spl                   # Production Splunk SPL Searches
-│       └── elastic_kql_queries.kql              # Production Elasticsearch KQL Alerts
-├── samples/
-│   └── parser-test-vectors/                     # 6 benign educational test vectors
-├── src/
-│   ├── entropy_detector.py                      # Statistical entropy & anomaly scoring module
-│   └── cmd_parser_simulator.py                  # Defensive 5-stage Python AST simulator
-├── tests/
-│   ├── test_entropy_detector.py                 # Automated unit tests for anomaly scoring
-│   └── test_cmd_parser_simulator.py             # Automated unit tests for AST simulator
+├── docs/                                        # Whitepapers, locales & visual assets
+│   ├── assets/                                  # Hero SVG banners & detection pipeline diagrams
+│   ├── locales/                                 # 9 translated documentation summaries
+│   └── MITRE_ATTACK_DEFENSE_MATRIX.md           # Formal MITRE ATT&CK 15-technique matrix
+├── references/                                  # 41 clean flattened open-source mirrors
+├── rules/                                       # 52 Sigma & 32 YARA production rulesets
+│   ├── sigma/                                   # 52 Modular Rules (evasion, exec, disc, persist)
+│   ├── yara/                                    # 32 Signatures (obfuscators, packers, heuristics)
+│   └── siem_queries/                            # Production Splunk SPL & Elastic KQL feeds
+├── src/                                         # Statistical anomaly detector & AST simulator
+├── tests/                                       # Automated test suites & test vectors
+│   ├── samples/                                 # 6 benign educational test vectors
+│   ├── test_entropy_detector.py                 # Anomaly scoring test suite
+│   └── test_cmd_parser_simulator.py             # AST simulator test suite
+├── memory/                                      # Worker context and task records
 ├── LICENSE                                      # Maya Thorne Systems & Security Research License (MT-SRL)
 └── README.md                                    # Root bilingual research overview
 ```
@@ -209,7 +189,7 @@ batch-forensics-and-ghidra-re/
 
 ## ⚖️ Legal & Ethical Notice
 
-This repository is maintained strictly for **defensive computer security research, enterprise detection engineering, parser correctness verification, and blue-team education**. All batch samples included in `samples/parser-test-vectors/` are benign test scripts that perform no malicious operations (printing educational demonstration strings such as `Hello World`).
+This repository is maintained strictly for **defensive computer security research, enterprise detection engineering, parser correctness verification, and blue-team education**. All batch samples included in `tests/samples/parser-test-vectors/` are benign test scripts that perform no malicious operations (printing educational demonstration strings such as `Hello World`).
 
 ---
 
