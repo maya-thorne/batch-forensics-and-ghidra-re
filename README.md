@@ -19,7 +19,7 @@
 [![SIEM Feeds](https://img.shields.io/badge/SIEM-Splunk_%26_Elastic-38bdf8.svg)](./rules/siem_queries)
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-15_Techniques-818cf8.svg)](./docs/MITRE_ATTACK_DEFENSE_MATRIX.md)
 [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-10b981.svg)](./tests)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![License: MT-SRL](https://img.shields.io/badge/License-MT--SRL-blue.svg)](./LICENSE)
 
 <sub>Engineered &amp; Audited by **[Maya Thorne](https://github.com/maya-thorne)** · Systems &amp; Detection Engineering Research</sub>
 
@@ -201,7 +201,7 @@ batch-forensics-and-ghidra-re/
 ├── tests/
 │   ├── test_entropy_detector.py                 # Automated unit tests for anomaly scoring
 │   └── test_cmd_parser_simulator.py             # Automated unit tests for AST simulator
-├── LICENSE                                      # MIT License
+├── LICENSE                                      # Maya Thorne Systems & Security Research License (MT-SRL)
 └── README.md                                    # Root bilingual research overview
 ```
 
