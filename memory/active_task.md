@@ -21,10 +21,17 @@
   - EDR/SOC 탐지 룰셋 패키지, 테스트 벡터 검증 결과, 릴리즈 노트 등록 완료.
 
 - [x] **5. 라이선스(LICENSE) 규격화 및 오픈소스 크레딧**:
-  - 공식 LICENSE (MIT License) 완비 및 관제 룰셋 활용 시 방어 연구 면책 조항 명시.
+  - 공식 LICENSE (Maya Thorne Systems & Security Research License - MT-SRL) 완비 및 방어 연구 면책 조항 명시 완료.
 
 - [x] **6. 전역 규칙 준수 (AI 도구명/워터마크 0건)**:
   - 룰셋 파일, 코드, 주석, 문서 어디에도 AI 도구명이나 워터마크가 들어가지 않도록 전수 감사 완료 (`Engineered & Audited by Maya Thorne`).
+
+- [x] **7. [@feedback] 5대 시각/구조 피드백 리팩토링 완수**:
+  - 루트 슬림화 (`@clean-root`: 6개 폴더 + 2개 파일로 압축하여 첫 화면 히어로 배너 노출 보장).
+  - 100% 영문 표준 네이밍 (`@english-naming`: 한글 파일/폴더 0건).
+  - 파일/모듈별 맥락 커밋 (`@semantic-commit`: 11개 개별 맥락 커밋 메시지 적용).
+  - 보안 감사 (`@security-audit`: .gitignore 민감 파일 및 환경변수 차단 룰 강화).
+  - 전용 라이선스 (`@custom-license`: MT-SRL 라이선스 적용 및 뱃지 갱신).
 
 ---
 
