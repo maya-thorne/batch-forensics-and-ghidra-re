@@ -11,7 +11,7 @@ from src.cmd_parser_simulator import (
 class TestCmdParserSimulator(unittest.TestCase):
     def setUp(self):
         self.sample_dir = os.path.join(
-            os.path.dirname(__file__), "..", "samples", "parser-test-vectors"
+            os.path.dirname(__file__), "samples", "parser-test-vectors"
         )
 
     def test_strip_carets_state_machine(self):

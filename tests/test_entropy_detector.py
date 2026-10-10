@@ -22,7 +22,7 @@ class TestEntropyDetector(unittest.TestCase):
 
     def test_obfuscated_samples_detection(self):
         sample_dir = os.path.join(
-            os.path.dirname(__file__), "..", "samples", "parser-test-vectors"
+            os.path.dirname(__file__), "samples", "parser-test-vectors"
         )
         sample_files = [f for f in os.listdir(sample_dir) if f.endswith(".bat")]
         self.assertTrue(len(sample_files) >= 6)
