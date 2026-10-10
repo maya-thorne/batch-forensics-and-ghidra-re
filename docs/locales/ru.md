@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../../assets/locales/ru/banner.svg" alt="batch-forensics-and-ghidra-re banner" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/banner.svg" alt="batch-forensics-and-ghidra-re banner" width="100%" /></a>
 </p>
 
 # 🛡️ batch-forensics-and-ghidra-re
@@ -30,7 +30,7 @@
 ## 🎨 batch-forensics-and-ghidra-re : Архитектура конвейера (Local Architecture Diagram)
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../../assets/locales/ru/architecture.svg" alt="architecture diagram" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
 
 ---
@@ -38,7 +38,7 @@
 ## 💻 Interactive Terminal Demonstration Asset
 
 <p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
 
 ---
@@ -68,7 +68,7 @@
 
 ## 📁 Repository Directory Structure
 
-- 📁 [`assets/`](../../assets) &mdash; Localized SVG hero banners, architecture schematics, and interactive terminal demo SVG.
+- 📁 [`docs/assets/`](../assets) &mdash; Localized SVG hero banners, architecture schematics, and interactive terminal demo SVG.
 - 📁 [`docs/`](../../docs) &mdash; Unabridged reverse engineering whitepapers and localized documentation.
 - 📁 [`references/`](../../references) &mdash; 41 clean flattened open-source mirrors (zero nested `.git` and zero binaries).
 - 📁 [`rules/`](../../rules) &mdash; Production Sigma and YARA defensive rulesets.
