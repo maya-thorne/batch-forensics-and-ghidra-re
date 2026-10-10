@@ -1,0 +1,20 @@
+# Elastic KQL Production Queries for Batch Obfuscation & EDR Telemetry
+# Generated for maya-thorne/batch-forensics-and-ghidra-re
+
+# 1. Caret Interleaving Evasion
+event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*\^([a-zA-Z0-9_\-\.]\^){2,}.*/
+
+# 2. Variable Slicing Single Character Harvesting
+event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*(%[a-zA-Z0-9_]+:~[0-9]+,1%){3,}.*/
+
+# 3. Delimiter Collapsing (Commas, Semicolons, Equals)
+event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*cmd(\.exe)?[,;=]+\/[cCkK].*/
+
+# 4. Reversed FOR Loop Reconstruction
+event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*for\s+\/[lL]\s+%+[a-zA-Z]\s+in\s*\([0-9]+,-1,[0-9]+\)\s+do.*/
+
+# 5. Certutil Decode Pipelines
+event.category: "process" and process.name: "certutil.exe" and process.command_line: (*-decode* or *-decodehex* or */decode* or */decodehex*)
+
+# 6. Anti-VM MAC and Disk Checks
+event.category: "process" and (process.name: "getmac.exe" or process.name: "wmic.exe") and process.command_line: (*00-05-69* or *00-0C-29* or *00-50-56* or *08-00-27* or *VMware* or *VirtualBox* or *QEMU*)

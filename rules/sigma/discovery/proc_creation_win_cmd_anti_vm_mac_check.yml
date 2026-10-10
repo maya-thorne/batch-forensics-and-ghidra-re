@@ -1,0 +1,28 @@
+title: Anti-VM Hypervisor MAC Address Check in Batch
+id: a3b4c5d6-e7f8-9a0b-1c2d-3e4f5a6b7c8d
+status: production
+description: Detects getmac scanning for VMware or VirtualBox OUI prefixes in batch anti-analysis routines.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1497.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\getmac.exe'
+    selection_pipe:
+        CommandLine|contains:
+            - '00-05-69'
+            - '00-0C-29'
+            - '00-50-56'
+            - '08-00-27'
+    condition: selection_img and selection_pipe
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

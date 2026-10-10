@@ -1,0 +1,26 @@
+title: Cmd.exe Suppressed Output and Minimized Window Flag
+id: a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d
+status: production
+description: Detects cmd.exe launched with echo suppression (/Q) and command execution (/C).
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_flags:
+        CommandLine|contains|all:
+            - '/q'
+            - '/c'
+    condition: selection_img and selection_flags
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: low

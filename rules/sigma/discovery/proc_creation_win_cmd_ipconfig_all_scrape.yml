@@ -1,0 +1,24 @@
+title: Network Configuration Reconnaissance Dump
+id: c1d2e3f4-a5b6-7c8d-9e0f-1a2b3c4d5e6f
+status: production
+description: Detects ipconfig /all redirected to disk (%TEMP%) by batch scripts.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1016
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\ipconfig.exe'
+    selection_flag:
+        CommandLine|contains: '/all'
+    condition: selection_img and selection_flag
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: low

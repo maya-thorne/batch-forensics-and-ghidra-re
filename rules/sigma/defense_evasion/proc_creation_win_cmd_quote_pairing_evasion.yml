@@ -1,0 +1,24 @@
+title: Cmd.exe Fragmented Quote Interleaving
+id: a2b3c4d5-6e7f-8a9b-0c1d-2e3f4a5b6c7d
+status: production
+description: Detects empty quotes ("") or fragmented double quote insertions inside command verbs (e.g. c""m""d.e""xe).
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_quotes:
+        CommandLine|re: 'c""m""d|p""o""w""e""r|w""h""o""a""m""i'
+    condition: selection_img and selection_quotes
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

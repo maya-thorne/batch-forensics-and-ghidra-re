@@ -1,0 +1,24 @@
+title: Cmd.exe Inline String Substitution Stripping
+id: e4f5a6b7-8c9d-0e1f-2a3b-4c5d6e7f8a9b
+status: production
+description: Detects dynamic variable substitution patterns (%VAR:sub=%) removing random delimiter padding characters before execution.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_sub:
+        CommandLine|re: '%[a-zA-Z0-9_]+:[a-zA-Z0-9_]+=%'
+    condition: selection_img and selection_sub
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

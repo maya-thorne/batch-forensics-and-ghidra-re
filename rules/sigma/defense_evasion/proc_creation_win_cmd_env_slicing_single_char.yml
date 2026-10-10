@@ -1,0 +1,28 @@
+title: Environment Variable Substring Single-Char Harvesting
+id: c2d3e4f5-6a7b-8c9d-0e1f-2a3b4c5d6e7f
+status: production
+description: Detects environment variable slicing with length 1 (:~offset,1) repeatedly concatenated to construct commands without raw literals.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_slicing:
+        CommandLine|contains|all:
+            - ':~'
+            - ',1%'
+    selection_density:
+        CommandLine|re: '(%[a-zA-Z0-9_]+:~[0-9]+,1%){3,}'
+    condition: selection_img and (selection_slicing or selection_density)
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

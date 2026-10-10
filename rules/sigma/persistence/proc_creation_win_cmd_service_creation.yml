@@ -1,0 +1,26 @@
+title: Windows Service Creation via SC in Batch
+id: a5b6c7d8-e9f0-1a2b-3c4d-5e6f7a8b9c0d
+status: production
+description: Detects sc.exe create establishing new persistent background service.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.persistence
+    - attack.t1543.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\sc.exe'
+    selection_args:
+        CommandLine|contains|all:
+            - 'create'
+            - 'binpath='
+    condition: selection_img and selection_args
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: critical

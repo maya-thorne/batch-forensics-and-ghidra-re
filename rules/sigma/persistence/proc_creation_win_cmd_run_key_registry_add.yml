@@ -1,0 +1,26 @@
+title: Run Key Registry Persistence Addition via Batch
+id: e3f4a5b6-c7d8-9e0f-1a2b-3c4d5e6f7a8b
+status: production
+description: Detects reg.exe adding Run or RunOnce keys under CurrentVersion\Run from batch.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.persistence
+    - attack.t1547.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\reg.exe'
+    selection_args:
+        CommandLine|contains|all:
+            - 'add'
+            - '\CurrentVersion\Run'
+    condition: selection_img and selection_args
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: critical

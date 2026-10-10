@@ -1,0 +1,28 @@
+title: Certutil Silent Base64/Hex Decode via Cmd.exe
+id: b9c0d1e2-3f4a-5b6c-7d8e-9f0a1b2c3d4e
+status: production
+description: Detects certutil.exe invoked from batch to silently decode base64 or hex payloads to executables.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1140
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\certutil.exe'
+    selection_flags:
+        CommandLine|contains:
+            - '-decode '
+            - '-decodehex '
+            - '/decode '
+            - '/decodehex '
+    condition: selection_img and selection_flags
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

@@ -1,0 +1,27 @@
+title: Cmd.exe Console Device Redirection Abuse
+id: c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f
+status: production
+description: Detects redirection or reading from console virtual device (\\.\con) to hide interactive scripts.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_con:
+        CommandLine|contains:
+            - '< con'
+            - '<con'
+            - '\\.\con'
+    condition: selection_img and selection_con
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

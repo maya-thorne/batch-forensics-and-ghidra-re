@@ -1,0 +1,24 @@
+title: Domain Trust Enumeration via Nltest in Batch
+id: f8a9b0c1-d2e3-4f5a-6b7c-8d9e0f1a2b3c
+status: production
+description: Detects nltest.exe /domain_trusts launched from automated batch scripts.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1482
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\nltest.exe'
+    selection_arg:
+        CommandLine|contains: '/domain_trusts'
+    condition: selection_img and selection_arg
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

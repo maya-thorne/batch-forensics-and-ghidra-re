@@ -1,0 +1,26 @@
+title: Forfiles Proxy Command Execution via Batch
+id: d1e2f3a4-5b6c-7d8e-9f0a-1b2c3d4e5f6a
+status: production
+description: Detects forfiles.exe /C parameter used to execute indirect shell commands bypassing direct parent-child rules.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1202
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\forfiles.exe'
+    selection_cmd:
+        CommandLine|contains:
+            - '/c '
+            - '/C '
+    condition: selection_img and selection_cmd
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

@@ -1,0 +1,26 @@
+title: Environment Variable Negative Offset Slicing
+id: d3e4f5a6-7b8c-9d0e-1f2a-3b4c5d6e7f8a
+status: production
+description: Detects negative offset environment slicing (%VAR:~-offset%) used to harvest predictable suffix characters (e.g. cmd.exe from %COMSPEC%).
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_neg:
+        CommandLine|contains:
+            - ':~-'
+            - ':~ -'
+    condition: selection_img and selection_neg
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

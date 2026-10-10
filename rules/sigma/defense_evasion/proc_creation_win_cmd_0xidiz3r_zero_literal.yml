@@ -1,0 +1,26 @@
+title: 0xidiz3r Zero-Literal Bootstrap Pattern
+id: e6f7a8b9-0c1d-2e3f-4a5b-6c7d8e9f0a1b
+status: production
+description: Detects 0xidiz3r Rust batch obfuscator generating 3-seed bootstrap environment maps without literal commands.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_oxidizer:
+        CommandLine|contains:
+            - '0xidiz3r'
+            - '0x_seed'
+    condition: selection_img and selection_oxidizer
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

@@ -1,0 +1,26 @@
+title: Bitsadmin Payload Download Initiated via Batch
+id: f2a3b4c5-d6e7-8f9a-0b1c-2d3e4f5a6b7c
+status: production
+description: Detects bitsadmin.exe downloading payload files into %TEMP% from batch scripts.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1197
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\bitsadmin.exe'
+    selection_flag:
+        CommandLine|contains:
+            - '/transfer'
+            - '/download'
+    condition: selection_img and selection_flag
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

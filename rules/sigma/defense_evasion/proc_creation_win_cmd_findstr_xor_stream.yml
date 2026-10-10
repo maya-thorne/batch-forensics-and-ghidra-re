@@ -1,0 +1,26 @@
+title: Findstr Payload Stream Extraction in Batch
+id: c0d1e2f3-4a5b-6c7d-8e9f-0a1b2c3d4e5f
+status: production
+description: Detects findstr filtering script self-contents (/V or /R) to strip comments and extract raw payloads.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\findstr.exe'
+    selection_flags:
+        CommandLine|contains|all:
+            - '/v'
+            - '%~f0'
+    condition: selection_img and selection_flags
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

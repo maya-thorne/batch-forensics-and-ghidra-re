@@ -1,0 +1,22 @@
+title: Systeminfo Virtualization Detection in Batch
+id: c5d6e7f8-a9b0-1c2d-3e4f-5a6b7c8d9e0f
+status: production
+description: Detects systeminfo piped into findstr filtering for Hyper-V or VM BIOS strings.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1082
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\systeminfo.exe'
+    condition: selection_img
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

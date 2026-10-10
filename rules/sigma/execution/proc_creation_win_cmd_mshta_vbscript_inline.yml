@@ -1,0 +1,28 @@
+title: Inline Mshta VBScript/JScript Launched from Batch
+id: a7b8c9d0-e1f2-3a4b-5c6d-7e8f9a0b1c2d
+status: production
+description: Detects cmd.exe executing inline mshta protocols (vbscript: or javascript:) bypassing PowerShell audit logging.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1218.005
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_parent:
+        ParentImage|endswith: '\cmd.exe'
+    selection_mshta:
+        Image|endswith: '\mshta.exe'
+    selection_proto:
+        CommandLine|contains:
+            - 'vbscript:'
+            - 'javascript:'
+    condition: selection_parent and selection_mshta and selection_proto
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

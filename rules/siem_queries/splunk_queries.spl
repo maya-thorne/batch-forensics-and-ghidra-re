@@ -1,0 +1,32 @@
+# Splunk SPL Production Queries for Batch Obfuscation & EDR Telemetry
+# Generated for maya-thorne/batch-forensics-and-ghidra-re
+
+# 1. Caret Character Density & Alternating Escape Sequences
+index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+| regex CommandLine="\^([a-zA-Z0-9_\-\.]\^){2,}"
+| stats count, values(CommandLine) by host, User, ParentImage, Image
+
+# 2. Environment Variable Substring Single-Char Harvesting (:~offset,1)
+index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+| regex CommandLine="(%[a-zA-Z0-9_]+:~[0-9]+,1%){3,}"
+| stats count by host, User, CommandLine
+
+# 3. Delimiter Collapsing (Commas, Semicolons, Equals replacing spaces)
+index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+| where match(CommandLine, "cmd(\.exe)?[,;=]+/[cCkK]")
+| table _time, host, User, ParentImage, CommandLine
+
+# 4. Reversed Numeric FOR Loop String Reconstruction
+index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+| regex CommandLine="for\s+/[lL]\s+%+[a-zA-Z]\s+in\s*\([0-9]+,-1,[0-9]+\)\s+do"
+| table _time, host, CommandLine
+
+# 5. Certutil Silent Base64 / Hex Decode
+index=windows EventCode=1 Image="*\\certutil.exe"
+| where match(CommandLine, "(?i)[\-\/]decode(hex)?")
+| table _time, host, User, ParentImage, CommandLine
+
+# 6. Anti-VM Hardware & MAC Fingerprinting in Batch
+index=windows EventCode=1 (Image="*\\getmac.exe" OR Image="*\\wmic.exe")
+| where match(CommandLine, "(?i)(00-05-69|00-0C-29|00-50-56|08-00-27|vmware|virtualbox|qemu)")
+| table _time, host, Image, CommandLine

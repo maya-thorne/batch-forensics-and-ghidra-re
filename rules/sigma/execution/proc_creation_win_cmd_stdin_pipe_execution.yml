@@ -1,0 +1,26 @@
+title: Cmd.exe Pipe STDIN Execution Stream
+id: b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e
+status: production
+description: Detects command lines piped directly into cmd.exe standard input without file creation on disk.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_pipe:
+        CommandLine|contains:
+            - '| cmd'
+            - '|cmd'
+    condition: selection_img and selection_pipe
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

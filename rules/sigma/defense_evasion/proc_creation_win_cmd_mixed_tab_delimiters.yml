@@ -1,0 +1,24 @@
+title: Cmd.exe Tab Character Delimiter Concealment
+id: e0f1a2b3-4c5d-6e7f-8a9b-0c1d2e3f4a5b
+status: production
+description: Detects execution of cmd.exe where parameters are separated by horizontal tabs (0x09) rather than spaces.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_tab:
+        CommandLine|re: 'cmd(\.exe)?\t+/[cCkK]'
+    condition: selection_img and selection_tab
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

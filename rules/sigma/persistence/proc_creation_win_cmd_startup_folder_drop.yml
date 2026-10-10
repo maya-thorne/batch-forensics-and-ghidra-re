@@ -1,0 +1,24 @@
+title: Batch Copying Executable to Startup Folder
+id: f4a5b6c7-d8e9-0f1a-2b3c-4d5e6f7a8b9c
+status: production
+description: Detects cmd.exe or copy/move writing files into Startup menu hierarchy.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.persistence
+    - attack.t1547.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd:
+        CommandLine|contains:
+            - '\Microsoft\Windows\Start Menu\Programs\Startup'
+            - '%appdata%\Microsoft\Windows\Start Menu'
+    condition: selection_cmd
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

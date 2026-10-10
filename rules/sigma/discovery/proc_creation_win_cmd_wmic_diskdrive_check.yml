@@ -1,0 +1,27 @@
+title: WMIC Disk Caption Sandbox Discovery
+id: e7f8a9b0-c1d2-3e4f-5a6b-7c8d9e0f1a2b
+status: production
+description: Detects wmic querying disk captions searching for VBOX or QEMU strings.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1497.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\wmic.exe'
+    selection_disk:
+        CommandLine|contains|all:
+            - 'diskdrive'
+            - 'get'
+            - 'caption'
+    condition: selection_img and selection_disk
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

@@ -1,0 +1,24 @@
+title: Cmd.exe Reversed FOR Loop String Reconstruction
+id: f1a2b3c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c
+status: production
+description: Detects Invoke-DOSfuscation style reversed numeric for-loops (for /L %i in (n,-1,0) do ...) actively reconstructing strings.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_loop:
+        CommandLine|re: 'for\s+/[lL]\s+%+[a-zA-Z]\s+in\s*\([0-9]+,-1,[0-9]+\)\s+do'
+    condition: selection_img and selection_loop
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: critical

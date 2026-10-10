@@ -1,0 +1,24 @@
+title: Logged On User Enumeration via Quser in Batch
+id: b0c1d2e3-f4a5-6b7c-8d9e-0f1a2b3c4d5e
+status: production
+description: Detects quser or qwinsta interrogating interactive desktop sessions.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1033
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\quser.exe'
+            - '\qwinsta.exe'
+    condition: selection_img
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

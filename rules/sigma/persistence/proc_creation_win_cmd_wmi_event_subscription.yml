@@ -1,0 +1,24 @@
+title: WMI Permanent Event Subscription via Batch
+id: b6c7d8e9-f0a1-2b3c-4d5e-6f7a8b9c0d1e
+status: production
+description: Detects wmic or powershell setting CommandLineEventConsumer in batch scripts.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.persistence
+    - attack.t1546.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_cmd:
+        CommandLine|contains:
+            - 'CommandLineEventConsumer'
+            - '__EventFilter'
+    condition: selection_cmd
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: critical

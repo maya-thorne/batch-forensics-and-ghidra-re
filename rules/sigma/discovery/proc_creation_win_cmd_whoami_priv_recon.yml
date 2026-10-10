@@ -1,0 +1,26 @@
+title: Privilege Reconnaissance via Whoami in Batch
+id: d2e3f4a5-b6c7-8d9e-0f1a-2b3c4d5e6f7a
+status: production
+description: Detects whoami /priv querying assigned security privileges from batch context.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.discovery
+    - attack.t1033
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\whoami.exe'
+    selection_flag:
+        CommandLine|contains:
+            - '/priv'
+            - '/all'
+    condition: selection_img and selection_flag
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

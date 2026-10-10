@@ -11,17 +11,17 @@
 
 # 🛡️ batch-forensics-and-ghidra-re
 
-**Windows Batch Forensics, Parser Internals & Binary Reverse Engineering Archive**
+**Blue Team EDR/SIEM Detection Engineering, 52 Sigma Rules, 32 YARA Signatures & Parser Forensics**
 
 [![Release](https://img.shields.io/github/v/release/maya-thorne/batch-forensics-and-ghidra-re?color=10b981)](https://github.com/maya-thorne/batch-forensics-and-ghidra-re/releases/latest)
-[![Ghidra MCP](https://img.shields.io/badge/Ghidra_MCP-Binary_RE-10b981.svg)](./docs/01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md)
-[![Parser](https://img.shields.io/badge/cmd.exe-5--Stage_Parser-38bdf8.svg)](./src/cmd_parser_simulator.py)
-[![References](https://img.shields.io/badge/References-41_Mirrors-818cf8.svg)](./references)
+[![Sigma Rules](https://img.shields.io/badge/Sigma_Rules-52_Modular-f59e0b.svg)](./rules/sigma)
+[![YARA Rules](https://img.shields.io/badge/YARA_Rules-32_Signatures-10b981.svg)](./rules/yara)
+[![SIEM Feeds](https://img.shields.io/badge/SIEM-Splunk_%26_Elastic-38bdf8.svg)](./rules/siem_queries)
+[![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-15_Techniques-818cf8.svg)](./docs/MITRE_ATTACK_DEFENSE_MATRIX.md)
 [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-10b981.svg)](./tests)
-[![Sigma Rules](https://img.shields.io/badge/Rules-Sigma_%26_YARA-f59e0b.svg)](./rules)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-<sub>Engineered &amp; Audited by **[Maya Thorne](https://github.com/maya-thorne)** · Systems &amp; Reverse Engineering Research</sub>
+<sub>Engineered &amp; Audited by **[Maya Thorne](https://github.com/maya-thorne)** · Systems &amp; Detection Engineering Research</sub>
 
 </div>
 
@@ -29,14 +29,55 @@
 
 ## 📌 Executive Overview
 
-Windows batch scripting (`cmd.exe`) features one of the most idiosyncratic, legacy-laden command parsers in modern computing. Because `cmd.exe` processes lines through multiple non-linear expansion passes—where escape carets (`^`), variable slicing (`%VAR:~offset,len%`), string substitution (`%VAR:old=new%`), and delayed expansion (`!VAR!`) interact dynamically—adversaries and red teams have historically leveraged these parsing quirks to blind traditional pattern-matching AV and EDR sensors.
+Windows batch scripting (`cmd.exe`) features one of the most complex command interpreters in enterprise environments. Adversaries and red teams exploit `cmd.exe` non-linear multi-pass parsing quirks—including caret (`^`) interleaving, variable substring slicing (`%VAR:~offset,len%`), and delayed exclamation expansion (`!VAR!`)—to blind pattern-matching endpoint sensors.
 
-This repository serves as a **definitive defensive research archive and reverse-engineering lab**. It unifies:
-1. **Ghidra MCP Binary Reverse Engineering**: Micro-decompilation and entrypoint disassembly of 4 real-world compiled batch executables (Native UPX stubs, VB6 `ThunRTMain`, .NET CLR resource unpackers, and LZMA RangeCoder packers).
-2. **Line-by-Line Source Dissection**: Structural code analysis of 5 landmark tools (`Invoke-DOSfuscation`, `SomalifuscatorV2`, `batch_deobfuscator`, `Exorcism`, `0xidiz3r`).
-3. **Formal `cmd.exe` 5-Stage Parser Specification**: Mathematical breakdown of lexer states, quoting semantics, delimiter collapsing, and expansion order.
-4. **Defensive Python AST Simulator & Unit Tests**: Deterministic, zero-execution static deobfuscator (`src/cmd_parser_simulator.py`) with 100% unit test coverage (`tests/test_cmd_parser_simulator.py`).
-5. **Curated Open-Source & AI Reference Mirrors**: 41 clean, flattened repositories and Hugging Face deobfuscation model cards.
+This repository is an **enterprise-grade defensive security engineering lab and SOC/EDR detection suite**. It delivers:
+1. **52 Modular Production Sigma Rules**: Comprehensive coverage across Defense Evasion (24), Execution (12), Discovery (10), and Persistence (6) mapped to Sysmon Event ID 1 and Security Event 4688.
+2. **32 Modular YARA Rules**: Granular static byte signatures targeting known obfuscators (12), compiled PE containers (10), and statistical anomaly heuristics (10).
+3. **Turnkey SIEM Query Feeds**: Production Splunk SPL (`rules/siem_queries/splunk_queries.spl`) and Elasticsearch Kibana KQL (`rules/siem_queries/elastic_kql_queries.kql`) ready for instant SOC dashboard deployment.
+4. **Statistical Entropy & Caret Density Scorer**: Pure static analysis engine (`src/entropy_detector.py`) calculating Shannon Entropy, Caret Ratio, and delimiter skew with automated unit tests (`tests/test_entropy_detector.py`).
+5. **MITRE ATT&CK Enterprise Matrix**: Formal defense mapping matrix in [`docs/MITRE_ATTACK_DEFENSE_MATRIX.md`](./docs/MITRE_ATTACK_DEFENSE_MATRIX.md).
+6. **Defensive 5-Stage AST Simulator**: Zero-execution command unescaper (`src/cmd_parser_simulator.py`) for safe in-memory triage.
+
+---
+
+## 🏗️ Blue Team EDR/SIEM Detection Pipeline
+
+<p align="center">
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
+</p>
+
+```mermaid
+flowchart LR
+    subgraph "1. Telemetry Ingestion"
+        E1["Sysmon Event ID 1\n(Process Create)"]
+        E2["Security Event 4688\n(CommandLine Tracking)"]
+        E3["PowerShell EID 4104\n(ScriptBlock Logs)"]
+        E4["Static File Scans\n(Disk / Memory Dump)"]
+    end
+
+    subgraph "2. AST Normalization Engine"
+        N1["detect_bom_and_decode()\nUTF-16LE BOM Unmasking"]
+        N2["strip_carets_state_machine()\nCaret Unescape Outside Quotes"]
+        N3["evaluate_var_expr()\n%VAR:~offset,len% Slicing"]
+        N4["calculate_shannon_entropy()\nByte Distribution Scoring"]
+    end
+
+    subgraph "3. Detection Rules Matrix"
+        R1["52 Modular Sigma Rules\n(Evasion / Exec / Disc / Pers)"]
+        R2["32 Modular YARA Rules\n(Obfuscators / Packers / Heuristics)"]
+        R3["Splunk SPL & Elastic KQL\n(Real-Time SIEM Correlation)"]
+    end
+
+    subgraph "4. SOC Incident Response"
+        A1["High-Fidelity SOC Alert\n(MITRE ATT&CK Tagged)"]
+        A2["SOAR Host Isolation\n& Automated Remediation"]
+    end
+
+    E1 & E2 & E3 & E4 --> N1 & N2 & N3 & N4
+    N1 & N2 & N3 & N4 --> R1 & R2 & R3
+    R1 & R2 & R3 --> A1 --> A2
+```
 
 ---
 
@@ -48,117 +89,75 @@ This repository serves as a **definitive defensive research archive and reverse-
 
 ---
 
-## 🏗️ Architecture & Forensic Pipeline
+## 🛡️ Rule Suite Architecture (52 Sigma & 32 YARA)
 
-<p align="center">
-  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/architecture.svg" alt="Pipeline Architecture" width="100%" /></a>
-</p>
+### 1. Modular Sigma Rules Breakdown (`rules/sigma/`)
+- 📁 **[defense_evasion/](./rules/sigma/defense_evasion/) (24 Rules)**:
+  - Caret character interleaving (`proc_creation_win_cmd_caret_interleaving.yml`)
+  - Double caret escape density (`proc_creation_win_cmd_double_caret_escaping.yml`)
+  - Single-character harvesting slices (`proc_creation_win_cmd_env_slicing_single_char.yml`)
+  - Negative offset slices (`proc_creation_win_cmd_env_slicing_negative_offset.yml`)
+  - Inline string substitution stripping (`proc_creation_win_cmd_string_substitution_strip.yml`)
+  - Delayed expansion enabled via `/V:ON` (`proc_creation_win_cmd_delayed_expansion_flag.yml`)
+  - Exclamation mark expansion density (`proc_creation_win_cmd_delayed_var_expansion.yml`)
+  - Delimiter collapsing via commas, semicolons, and equals signs (`proc_creation_win_cmd_comma_delimiter_collapsing.yml`, etc.)
+  - Reversed numeric FOR loop reconstruction (`proc_creation_win_cmd_reversed_for_loop.yml`)
+  - Polyglot BatCloak UTF-16LE BOM bypass (`proc_creation_win_cmd_batcloak_polyglot_bom.yml`)
+  - ScrubCrypt stage 1 loader bootstrap (`proc_creation_win_cmd_scrubcrypt_stage1_bootstrap.yml`)
+  - Somalifuscator Caesar shift decoder (`proc_creation_win_cmd_somalifuscator_caesar_decoder.yml`)
+  - 0xidiz3r zero-literal bootstrap pattern (`proc_creation_win_cmd_0xidiz3r_zero_literal.yml`)
+  - Certutil silent decode pipelines (`proc_creation_win_cmd_certutil_decode_hidden.yml`)
+  - Forfiles, Pcalua, and Rundll32 indirect batch execution rules.
+- 📁 **[execution/](./rules/sigma/execution/) (12 Rules)**:
+  - Output suppression (`/Q`), STDIN piping, console device redirection (`\\.\con`), clipboard staging (`clip.exe`), base64 PowerShell spawns, cscript VBS staging, inline mshta, regsvr32 scrobj, and wmic process calls.
+- 📁 **[discovery/](./rules/sigma/discovery/) (10 Rules)**:
+  - Anti-VM MAC address scanning, localhost ping delay evasion, virtualization checks, tasklist debugger discovery, domain trust enumeration, and privilege discovery.
+- 📁 **[persistence/](./rules/sigma/persistence/) (6 Rules)**:
+  - Registry Run key additions, Startup folder drops, Windows service creation (`sc create`), WMI event subscriptions, COR profiler DLL hijacking, and AppInit_DLLs tampering.
 
-```mermaid
-flowchart TD
-    subgraph "1. Obfuscation & Delivery Techniques"
-        RAW["Raw Batch Script (.bat/.cmd)"] --> T1["Invoke-DOSfuscation (PowerShell)\nEnv Slicing & Reversed FOR Loops"]
-        RAW --> T2["BatCloak / BEncoder (C#/Batch)\nUTF-16LE BOM (0xFF 0xFE) Polyglot Disguise"]
-        RAW --> T3["SomalifuscatorV2 / 0xidiz3r (Py/Rust)\nDynamic Caesar Cipher & Zero-Literal Bootstrapping"]
-        T1 & T2 & T3 --> OBF["Obfuscated Batch Payload"]
-        OBF --> PE["Bat2Exe Compilers (Native/VB6/.NET/Bytepress)"]
-    end
+### 2. Modular YARA Rules Breakdown (`rules/yara/`)
+- 📁 **[obfuscators/](./rules/yara/obfuscators/) (12 Rules)**:
+  - `Invoke-DOSfuscation`, `BatCloak`, `ScrubCrypt`, `Somalifuscator` V1 & V2, `0xidiz3r`, `Abobus`, `BatchAlchemy`, `BEncoder`, `PandaCrypter`, `Invoke-CradleCrafter`, and `Batch-Dump`.
+- 📁 **[packers/](./rules/yara/packers/) (10 Rules)**:
+  - Bat2Exe UPX native containers, VB6 `ThunRTMain` stubs, .NET CLR resource unpackers, Bytepress LZMA RangeCoder decompressors, F2KO software converters, and PE overlay XOR stubs.
+- 📁 **[heuristics/](./rules/yara/heuristics/) (10 Rules)**:
+  - High caret density, excessive variable slicing, Certutil hex decode chains, reversed FOR loop reconstruction, delimiter collapsing, dynamic substitution tables, anti-VM hardware fingerprinting, Shannon entropy thresholds, PowerShell download cradles, and in-memory AMSI/ETW byte patching.
 
-    subgraph "2. Ghidra MCP Binary Reverse Engineering"
-        PE --> G1["bat2exe_12.exe\nEntry: 0x20ea0 (UPX0/UPX1 Native Stub)"]
-        PE --> G2["BEDeCode.exe\nEntry: 0x1670 (VB6 ThunRTMain & CHRMAPSET)"]
-        PE --> G3["example.exe\nEntry: 0x337e (.NET _CorExeMain & batch_cmd)"]
-        PE --> G4["example_bytepressed.exe\nEntry: 0x2077 (LZMA RangeCoder Decryption)"]
-    end
+---
 
-    subgraph "3. Defensive Static AST & Dynamic Hooking"
-        OBF --> P1["cmd_parser_simulator.py (Defensive AST)\nBOM Check ➔ Caret Machine ➔ Slicing ➔ Telemetry"]
-        OBF --> D1["Exorcism Hook Engine\ncmd.exe!FindFixAndRun (0x116B0) Hook"]
-        P1 & G1 & G2 & G3 & G4 & D1 --> DET["SOC/EDR Detection Engineering\nSigma & YARA Rule Generation"]
-    end
+## ⚡ Instant SIEM Query Deployment
+
+### Splunk SPL Snippet (`rules/siem_queries/splunk_queries.spl`)
+```spl
+index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+| regex CommandLine="\^([a-zA-Z0-9_\-\.]\^){2,}"
+| stats count, values(CommandLine) by host, User, ParentImage, Image
+```
+
+### Elastic KQL Snippet (`rules/siem_queries/elastic_kql_queries.kql`)
+```kql
+event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*(%[a-zA-Z0-9_]+:~[0-9]+,1%){3,}.*/
 ```
 
 ---
 
-## 📚 Master Technical Whitepapers
-
-| Whitepaper Document | Description & Key Findings |
-| :--- | :--- |
-| 🔬 **[01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md](./docs/01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md)** | **Primary Research Whitepaper (480+ lines)**: Complete Ghidra MCP triage of 4 PE binaries, line-by-line source dissection of 5 core engines, formal state-machine modeling of `cmd.exe`, and EDR telemetry extraction. |
-| 📖 **[02_CLASSIC_TO_MODERN_EVOLUTION_1990_2026.md](./docs/02_CLASSIC_TO_MODERN_EVOLUTION_1990_2026.md)** | **30-Year Chronological Evolution**: 1st Gen (1990s MS-DOS ASCII/delimiters), 2nd Gen (2016 `Invoke-DOSfuscation`), 3rd Gen (2022–2024 `BatCloak`/`SomalifuscatorV2`), and 4th Gen (2025–2026 Rust ASTs & LLM deobfuscation). |
-| 🛡️ **[03_BATCLOAK_MULTI_STAGE_LOADER_FORENSICS.md](./docs/03_BATCLOAK_MULTI_STAGE_LOADER_FORENSICS.md)** | **BatCloak / ScrubCrypt Multi-Stage Loader Analysis**: Deep dive into Stage 1 header manipulation, Stage 2 polyglot delimiter stripping, and Stage 3 reflective .NET memory injection. |
-| 📑 **[04_BATCH_OBFUSCATION_ENCYCLOPEDIA.md](./docs/04_BATCH_OBFUSCATION_ENCYCLOPEDIA.md)** | **Comprehensive Taxonomy Matrix**: Detailed taxonomy of 12 distinct obfuscation primitives with defensive countermeasures. |
-| 🗺️ **[05_BATCH_OBFUSCATION_MASTER_GUIDE.md](./docs/05_BATCH_OBFUSCATION_MASTER_GUIDE.md)** | **Enterprise Detection Guide**: SOC triage playbook, EDR telemetry anomaly scoring, and multi-layer mitigation architecture. |
-
----
-
-## 🔬 Ghidra MCP Binary Reverse Engineering Matrix
-
-Using the Ghidra MCP analysis suite, 4 real-world compiled batch executables were reverse engineered to identify unpacking entrypoints and payload reconstruction mechanisms:
-
-```
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-| Target Binary            | Compiler Architecture | Entrypoint VA     | Forensics & Decompilation Findings                |
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-| bat2exe_12.exe           | Native Win32 (UPX)    | 0x00420ea0        | 3-section UPX container. Entrypoint contains standard |
-|                          |                       |                   | PUSHAD / LEA ESI / MOV EDI decompression loop.    |
-|                          |                       |                   | Payload extracted via memory dump post-POPAD.     |
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-| BEDeCode.exe             | Visual Basic 6.0      | 0x00401670        | Imports MSVBVM60.DLL!ThunRTMain.                  |
-|                          |                       |                   | Features hardcoded CHRMAPSET Caesar substitution   |
-|                          |                       |                   | table in .rdata section for bidirectional decode. |
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-| example.exe              | .NET CLR v4.0.30319   | 0x0040337e        | Imports mscoree.dll!_CorExeMain.                  |
-|                          |                       |                   | Embedded batch payload stored as encrypted managed |
-|                          |                       |                   | resource named "batch_cmd" dropped to %TEMP%.     |
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-| example_bytepressed.exe  | Native C / Bytepress  | 0x00402077        | Bytepress LZMA RangeCoder decompressor stub.      |
-|                          |                       |                   | High section entropy (7.91). Allocates VirtualAlloc|
-|                          |                       |                   | RWX buffer to unpack runtime batch interpreter.   |
-+--------------------------+-----------------------+-------------------+---------------------------------------------------+
-```
-
----
-
-## ⚙️ cmd.exe 5-Stage Lexing & Parsing Mechanics
-
-A fundamental insight of this research is that `cmd.exe` does not execute scripts in a single linear pass. Instead, it processes every line through 5 distinct parsing phases:
-
-1. **Phase 1: Encoding & BOM Detection**:
-   - `cmd.exe` inspects the initial byte markers. If a UTF-16LE BOM (`0xFF 0xFE`) is present, `cmd.exe` checks subsequent lines. If line 2 contains ANSI characters, it falls back to single-byte interpretation, whereas naive text viewers display corrupt Chinese/Korean glyphs.
-2. **Phase 2: Caret (`^`) Lexer State Machine**:
-   - `cmd.exe` maintains an `IN_QUOTES` boolean state.
-   - Outside double quotes (`"..."`), a caret (`^`) causes `cmd.exe` to consume the next character literally, discarding the caret (`w^h^o^a^m^i` $\to$ `whoami`).
-   - Inside double quotes, carets are treated as literal characters (`"hello ^ world"` $\to$ `"hello ^ world"`).
-3. **Phase 3: Immediate Percent (`%VAR%`) Expansion**:
-   - `cmd.exe` expands environment variables left-to-right.
-   - Supports substring slicing: `%VAR:~start,length%` (negative offsets measure from end).
-   - Supports string substitution: `%VAR:pattern=replacement%`.
-4. **Phase 4: Delimiter Normalization**:
-   - Unquoted space characters, tabs (`\t`), semicolons (`;`), commas (`,`), and equals signs (`=`) are collapsed into single argument delimiters.
-5. **Phase 5: Delayed Exclamation (`!VAR!`) Expansion**:
-   - If `/V:ON` is set or `setlocal enabledelayedexpansion` is called, exclamation markers are expanded at execution time, bypassing Phase 3 static checks.
-
----
-
-## 💻 Python Parser Simulator & Verification
-
-The repository includes a defensive, zero-execution Python simulator (`src/cmd_parser_simulator.py`) implementing this 5-stage specification:
+## 🔬 Statistical Anomaly Scorer & Tests
 
 ```bash
-# Run unit tests verifying all 6 benign parser test vectors
+# Run the automated unit tests verifying the anomaly scorer and parser simulator
 python -m unittest discover tests
 ```
 
 ```python
-from src.cmd_parser_simulator import deobfuscate_batch_script
+from src.entropy_detector import analyze_script_telemetry
 
 with open("samples/parser-test-vectors/01_env_slicing_sample.bat", "rb") as f:
-    report = deobfuscate_batch_script(f.read())
+    result = analyze_script_telemetry(f.read())
 
-print(f"Detected Encoding : {report.encoding_anomaly}")
-print(f"Shannon Entropy   : {report.shannon_entropy}")
-print(f"Normalized Script :\n" + "\n".join(report.normalized_lines))
+print(f"Shannon Entropy : {result.shannon_entropy}")
+print(f"Threat Level    : {result.threat_level}")
+print(f"Composite Score : {result.composite_threat_score}/100.0")
+print(f"Anomalies       : {result.triggered_anomalies}")
 ```
 
 ---
@@ -169,79 +168,51 @@ print(f"Normalized Script :\n" + "\n".join(report.normalized_lines))
 batch-forensics-and-ghidra-re/
 ├── assets/
 │   ├── hero.svg                                 # Master dark terminal SVG banner
-│   ├── architecture.svg                         # 3-tier pipeline architecture diagram
+│   ├── detection_pipeline.svg                   # Blue Team EDR/SIEM detection pipeline
+│   ├── architecture.svg                         # 3-tier forensic architecture diagram
 │   ├── demo_parser_terminal.svg                 # Animated live terminal execution SVG
-│   └── locales/                                 # 10-language localized SVG banners & schematics
-│       ├── en/
-│       ├── ko/
-│       └── ...
+│   └── locales/                                 # 10-language localized SVG banners & diagrams
 ├── docs/
+│   ├── MITRE_ATTACK_DEFENSE_MATRIX.md           # Formal MITRE ATT&CK 15-technique matrix
 │   ├── 01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md   # Primary Ghidra RE whitepaper
 │   ├── 02_CLASSIC_TO_MODERN_EVOLUTION_1990_2026.md          # 30-year evolution whitepaper
 │   ├── 03_BATCLOAK_MULTI_STAGE_LOADER_FORENSICS.md          # BatCloak forensic analysis
 │   ├── 04_BATCH_OBFUSCATION_ENCYCLOPEDIA.md                 # Taxonomy encyclopedia
 │   ├── 05_BATCH_OBFUSCATION_MASTER_GUIDE.md                 # Detection & triage guide
 │   └── locales/                                 # 9 translated documentation summaries
-│       ├── ko.md
-│       ├── zh-CN.md
-│       └── ...
-├── references/                                  # 41 clean flattened open-source mirrors
-│   ├── 0xidiz3r/                                # Rust zero-literal AST obfuscator
-│   ├── batch_deobfuscator/                      # Static pushdown automaton deobfuscator
-│   ├── Exorcism/                                # cmd.exe!FindFixAndRun API hook engine
-│   ├── Invoke-DOSfuscation/                     # PowerShell environment slicing generator
-│   ├── SomalifuscatorV2/                        # Python dynamic Caesar cipher generator
-│   └── ... (36 additional flattened repositories)
 ├── rules/
-│   ├── sigma_batch_obfuscation.yml              # SOC/EDR Sigma detection rules
-│   └── yara_batch_obfuscation.yar               # Static YARA pattern matching rules
+│   ├── sigma/                                   # 52 Modular Production Sigma Rules
+│   │   ├── defense_evasion/                     # 24 Rules (Carets, Slicing, Delimiters)
+│   │   ├── execution/                           # 12 Rules (Pipes, Encoded PS, Looping)
+│   │   ├── discovery/                           # 10 Rules (Anti-VM, Recon, Debugger Scan)
+│   │   └── persistence/                         # 6 Rules (Run Keys, Services, AppInit)
+│   ├── yara/                                    # 32 Modular Production YARA Signatures
+│   │   ├── obfuscators/                         # 12 Rules (BatCloak, Somali, 0xidiz3r)
+│   │   ├── packers/                             # 10 Rules (Bat2Exe UPX/VB6/.NET/Bytepress)
+│   │   └── heuristics/                          # 10 Rules (Caret Density, Hex Pipes)
+│   └── siem_queries/                            # Turnkey SIEM Query Feeds
+│       ├── splunk_queries.spl                   # Production Splunk SPL Searches
+│       └── elastic_kql_queries.kql              # Production Elasticsearch KQL Alerts
 ├── samples/
 │   └── parser-test-vectors/                     # 6 benign educational test vectors
-│       ├── 01_env_slicing_sample.bat
-│       ├── 02_caret_and_delimiters_sample.bat
-│       ├── 03_dynamic_substitution_table_sample.bat
-│       ├── 04_reverse_reconstruction_sample.bat
-│       ├── 05_certutil_hex_pipeline_sample.bat
-│       └── 06_anti_vm_and_sandbox_evasion_sample.bat
 ├── src/
+│   ├── entropy_detector.py                      # Statistical entropy & anomaly scoring module
 │   └── cmd_parser_simulator.py                  # Defensive 5-stage Python AST simulator
 ├── tests/
-│   └── test_cmd_parser_simulator.py             # Automated unit tests (100% passing)
+│   ├── test_entropy_detector.py                 # Automated unit tests for anomaly scoring
+│   └── test_cmd_parser_simulator.py             # Automated unit tests for AST simulator
 ├── LICENSE                                      # MIT License
 └── README.md                                    # Root bilingual research overview
 ```
 
 ---
 
-## 🛡️ Detection Engineering (Sigma & YARA)
-
-This lab provides production-grade detection signatures for EDR platforms and triage pipelines:
-
-### Sigma Rule Snippet (`rules/sigma_batch_obfuscation.yml`)
-```yaml
-title: Suspicious Cmd.exe Obfuscation via Variable Slicing and Caret Density
-status: production
-detection:
-    selection_process:
-        Image|endswith: '\cmd.exe'
-    selection_args:
-        CommandLine|contains:
-            - '/v:on'
-            - ':~'
-    selection_carets:
-        CommandLine|re: '\^[\w\s]\^[\w\s]\^'
-    condition: selection_process and (selection_args or selection_carets)
-level: high
-```
-
----
-
 ## ⚖️ Legal & Ethical Notice
 
-This repository is maintained for **defensive computer security research, parser correctness verification, reverse engineering education, and threat detection engineering**. All batch samples included in `samples/parser-test-vectors/` are benign test scripts that perform no malicious operations (printing educational demonstration strings such as `Hello World`).
+This repository is maintained strictly for **defensive computer security research, enterprise detection engineering, parser correctness verification, and blue-team education**. All batch samples included in `samples/parser-test-vectors/` are benign test scripts that perform no malicious operations (printing educational demonstration strings such as `Hello World`).
 
 ---
 
 <div align="center">
-<sub>Maintained with precision by <strong><a href="https://github.com/maya-thorne">Maya Thorne</a></strong></sub>
+<sub>Maintained with precision by <strong><a href="https://github.com/maya-thorne">Maya Thorne</a></strong> · Blue Team &amp; Detection Engineering</sub>
 </div>

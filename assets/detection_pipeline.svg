@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="detBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a14"/>
+      <stop offset="50%" stop-color="#0b1324"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+    <linearGradient id="pBox1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="glowD" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="940" height="420" rx="14" fill="url(#detBg)"/>
+  <rect x="0.5" y="0.5" width="939" height="419" rx="13.5" fill="none" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Title Header -->
+  <text x="470" y="38" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" letter-spacing="-0.5">
+    batch-forensics-and-ghidra-re : Blue Team EDR/SIEM Detection Pipeline
+  </text>
+  <text x="470" y="62" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="500">
+    Automated Log Ingestion &rarr; AST Lexer Unescaping &rarr; 52 Sigma / 32 YARA Rule Evaluation &rarr; SOC Alerting
+  </text>
+
+  <!-- 4 Architecture Blocks -->
+  <!-- 1. Log Ingestion -->
+  <g transform="translate(30, 92)">
+    <rect width="195" height="290" rx="8" fill="url(#pBox1)" stroke="#3b82f6" stroke-width="1.2"/>
+    <rect width="195" height="34" rx="8" fill="#1d4ed8"/>
+    <rect y="26" width="195" height="8" fill="#1d4ed8"/>
+    <text x="97" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      1. LOG INGESTION
+    </text>
+    <g transform="translate(14, 52)" font-family="Consolas, monospace" font-size="11" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#60a5fa">&bull; Sysmon Event ID 1</text>
+      <text x="0" y="16" fill="#94a3b8">  (Process Creation)</text>
+      <text x="0" y="44" font-weight="bold" fill="#60a5fa">&bull; Security 4688</text>
+      <text x="0" y="60" fill="#94a3b8">  (Process Tracking)</text>
+      <text x="0" y="88" font-weight="bold" fill="#60a5fa">&bull; PowerShell EID 4104</text>
+      <text x="0" y="104" fill="#94a3b8">  (ScriptBlock Logging)</text>
+      <text x="0" y="132" font-weight="bold" fill="#60a5fa">&bull; EDR Telemetry Feeds</text>
+      <text x="0" y="148" fill="#94a3b8">  (CrowdStrike/Defender)</text>
+      <text x="0" y="176" font-weight="bold" fill="#60a5fa">&bull; File Scans (Disk/Mem)</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(230, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#38bdf8" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#38bdf8"/>
+  </g>
+
+  <!-- 2. Normalization & AST Lexer -->
+  <g transform="translate(258, 92)">
+    <rect width="195" height="290" rx="8" fill="url(#pBox1)" stroke="#06b6d4" stroke-width="1.2"/>
+    <rect width="195" height="34" rx="8" fill="#0891b2"/>
+    <rect y="26" width="195" height="8" fill="#0891b2"/>
+    <text x="97" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      2. AST NORMALIZATION
+    </text>
+    <g transform="translate(14, 52)" font-family="Consolas, monospace" font-size="11" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#22d3ee">&bull; UTF-16LE BOM Strip</text>
+      <text x="0" y="16" fill="#94a3b8">  (Polyglot Unmasking)</text>
+      <text x="0" y="44" font-weight="bold" fill="#22d3ee">&bull; Caret State Machine</text>
+      <text x="0" y="60" fill="#94a3b8">  (Outside Double Quotes)</text>
+      <text x="0" y="88" font-weight="bold" fill="#22d3ee">&bull; Slicing Resolution</text>
+      <text x="0" y="104" fill="#94a3b8">  (%VAR:~offset,len%)</text>
+      <text x="0" y="132" font-weight="bold" fill="#22d3ee">&bull; Delimiter Collapsing</text>
+      <text x="0" y="148" fill="#94a3b8">  (Commas, Semis, Equals)</text>
+      <text x="0" y="176" font-weight="bold" fill="#22d3ee">&bull; Delayed Expansion !V!</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(458, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#10b981" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#10b981"/>
+  </g>
+
+  <!-- 3. Detection Engine (52 Sigma / 32 YARA) -->
+  <g transform="translate(486, 92)">
+    <rect width="205" height="290" rx="8" fill="url(#pBox1)" stroke="#10b981" stroke-width="1.5" filter="url(#glowD)"/>
+    <rect width="205" height="34" rx="8" fill="#059669"/>
+    <rect y="26" width="205" height="8" fill="#059669"/>
+    <text x="102" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      3. DETECTION RULES
+    </text>
+    <g transform="translate(14, 52)" font-family="Consolas, monospace" font-size="11" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#34d399">&bull; 52 Sigma Rules:</text>
+      <text x="12" y="18" fill="#a7f3d0">- 24 Defense Evasion</text>
+      <text x="12" y="34" fill="#a7f3d0">- 12 Execution</text>
+      <text x="12" y="50" fill="#a7f3d0">- 10 Discovery</text>
+      <text x="12" y="66" fill="#a7f3d0">- 6 Persistence</text>
+      <text x="0" y="94" font-weight="bold" fill="#34d399">&bull; 32 YARA Rules:</text>
+      <text x="12" y="112" fill="#a7f3d0">- 12 Obfuscator Patterns</text>
+      <text x="12" y="128" fill="#a7f3d0">- 10 PE Container Packers</text>
+      <text x="12" y="144" fill="#a7f3d0">- 10 Anomaly Heuristics</text>
+      <text x="0" y="172" font-weight="bold" fill="#34d399">&bull; Shannon Entropy &gt; 5.2</text>
+    </g>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <g transform="translate(696, 237)">
+    <line x1="0" y1="0" x2="16" y2="0" stroke="#f59e0b" stroke-width="2.5"/>
+    <polygon points="16,-5 24,0 16,5" fill="#f59e0b"/>
+  </g>
+
+  <!-- 4. SOC Alert & Response -->
+  <g transform="translate(724, 92)">
+    <rect width="185" height="290" rx="8" fill="url(#pBox1)" stroke="#f59e0b" stroke-width="1.2"/>
+    <rect width="185" height="34" rx="8" fill="#d97706"/>
+    <rect y="26" width="185" height="8" fill="#d97706"/>
+    <text x="92" y="22" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      4. SOC ALERT &amp; SOAR
+    </text>
+    <g transform="translate(14, 52)" font-family="Consolas, monospace" font-size="11" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#fbbf24">&bull; Splunk SPL Searches</text>
+      <text x="0" y="16" fill="#94a3b8">  (Real-time Dashboard)</text>
+      <text x="0" y="44" font-weight="bold" fill="#fbbf24">&bull; Elastic KQL Alerts</text>
+      <text x="0" y="60" fill="#94a3b8">  (Kibana SIEM Engine)</text>
+      <text x="0" y="88" font-weight="bold" fill="#fbbf24">&bull; MITRE ATT&amp;CK Tagging</text>
+      <text x="0" y="104" fill="#94a3b8">  (T1059.003, T1027, T1140)</text>
+      <text x="0" y="132" font-weight="bold" fill="#fbbf24">&bull; SOAR Containment</text>
+      <text x="0" y="148" fill="#94a3b8">  (Process Terminate/Isolate)</text>
+      <text x="0" y="176" font-weight="bold" fill="#fbbf24">&bull; Incident Triage Ticket</text>
+    </g>
+  </g>
+</svg>

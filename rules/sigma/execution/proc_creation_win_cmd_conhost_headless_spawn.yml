@@ -1,0 +1,24 @@
+title: Headless Conhost Spawning Cmd.exe Payload
+id: d0e1f2a3-b4c5-6d7e-8f9a-0b1c2d3e4f5a
+status: production
+description: Detects conhost.exe spawned in headless mode to host obfuscated console execution.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\conhost.exe'
+    selection_flags:
+        CommandLine|contains: '--headless'
+    condition: selection_img and selection_flags
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

@@ -1,0 +1,26 @@
+title: Regsvr32 Remote Scriptlet Execution via Batch
+id: b8c9d0e1-f2a3-4b5c-6d7e-8f9a0b1c2d3e
+status: production
+description: Detects batch script invoking regsvr32 with scrobj.dll pointing to remote/local scriptlet.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1218.010
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\regsvr32.exe'
+    selection_flags:
+        CommandLine|contains|all:
+            - 'scrobj.dll'
+            - '/s'
+    condition: selection_img and selection_flags
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: critical

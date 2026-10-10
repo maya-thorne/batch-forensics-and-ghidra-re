@@ -1,0 +1,24 @@
+title: Windows Clipboard Command Staging via Clip.exe
+id: d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a
+status: production
+description: Detects batch commands feeding payloads into Windows clipboard using clip.exe.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\clip.exe'
+    selection_parent:
+        ParentImage|endswith: '\cmd.exe'
+    condition: selection_img and selection_parent
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium

@@ -1,0 +1,26 @@
+title: Suspicious Cmd.exe Caret Character Interleaving
+id: f8a1e0b1-3c2d-4e5f-a6b7-8c9d0e1f2a34
+status: production
+description: Detects command execution with alternating caret (^) escape characters outside quotes to evade static keyword detection (e.g. w^h^o^a^m^i).
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1027.010
+    - attack.execution
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_caret:
+        CommandLine|re: '\^([a-zA-Z0-9_\-\.]\^){2,}'
+    condition: selection_img and selection_caret
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: high

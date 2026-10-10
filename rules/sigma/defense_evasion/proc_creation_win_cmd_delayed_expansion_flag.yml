@@ -1,0 +1,28 @@
+title: Cmd.exe Delayed Environment Expansion Enabled via Flag
+id: f5a6b7c8-9d0e-1f2a-3b4c-5d6e7f8a9b0c
+status: production
+description: Detects cmd.exe launched with delayed expansion switch (/V:ON or /V:1) typically required by advanced obfuscators.
+references:
+    - https://github.com/maya-thorne/batch-forensics-and-ghidra-re
+author: Maya Thorne (Detection Engineering)
+date: 2026-10-11
+modified: 2026-10-11
+tags:
+    - attack.defense_evasion
+    - attack.t1059.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmd.exe'
+    selection_flag:
+        CommandLine|contains:
+            - '/v:on'
+            - '/v:1'
+            - '/V:ON'
+            - '/V:1'
+    condition: selection_img and selection_flag
+falsepositives:
+    - Highly complex legacy IT maintenance or software deployment scripts (infrequent)
+level: medium
