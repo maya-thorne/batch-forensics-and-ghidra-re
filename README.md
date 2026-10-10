@@ -47,6 +47,10 @@ This repository is an **enterprise-grade defensive security engineering lab and 
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/architecture.svg" alt="Architecture Diagram" width="100%" /></a>
+</p>
+
 ```mermaid
 flowchart LR
     subgraph "1. Telemetry Ingestion"
