@@ -13,6 +13,7 @@
 
 **Windows Batch Forensics, Parser Internals & Binary Reverse Engineering Archive**
 
+[![Release](https://img.shields.io/github/v/release/maya-thorne/batch-forensics-and-ghidra-re?color=10b981)](https://github.com/maya-thorne/batch-forensics-and-ghidra-re/releases/latest)
 [![Ghidra MCP](https://img.shields.io/badge/Ghidra_MCP-Binary_RE-10b981.svg)](./docs/01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md)
 [![Parser](https://img.shields.io/badge/cmd.exe-5--Stage_Parser-38bdf8.svg)](./src/cmd_parser_simulator.py)
 [![References](https://img.shields.io/badge/References-41_Mirrors-818cf8.svg)](./references)
@@ -39,7 +40,19 @@ This repository serves as a **definitive defensive research archive and reverse-
 
 ---
 
+## 💻 Interactive Parser Simulator Live Demo
+
+<p align="center">
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
+</p>
+
+---
+
 ## 🏗️ Architecture & Forensic Pipeline
+
+<p align="center">
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./assets/architecture.svg" alt="Pipeline Architecture" width="100%" /></a>
+</p>
 
 ```mermaid
 flowchart TD
@@ -156,9 +169,11 @@ print(f"Normalized Script :\n" + "\n".join(report.normalized_lines))
 batch-forensics-and-ghidra-re/
 ├── assets/
 │   ├── hero.svg                                 # Master dark terminal SVG banner
-│   └── locales/                                 # 10-language localized SVG banners
-│       ├── en/banner.svg
-│       ├── ko/banner.svg
+│   ├── architecture.svg                         # 3-tier pipeline architecture diagram
+│   ├── demo_parser_terminal.svg                 # Animated live terminal execution SVG
+│   └── locales/                                 # 10-language localized SVG banners & schematics
+│       ├── en/
+│       ├── ko/
 │       └── ...
 ├── docs/
 │   ├── 01_DEEP_REVERSE_ENGINEERING_AND_SOURCE_ANALYSIS.md   # Primary Ghidra RE whitepaper

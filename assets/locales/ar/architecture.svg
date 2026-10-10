@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c16"/>
+      <stop offset="100%" stop-color="#04060a"/>
+    </linearGradient>
+    <linearGradient id="box1G" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141a29"/>
+      <stop offset="100%" stop-color="#0c121d"/>
+    </linearGradient>
+    <filter id="boxGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="940" height="380" rx="12" fill="url(#bgG)"/>
+  <rect x="0.5" y="0.5" width="939" height="379" rx="11.5" fill="none" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Title & Subtitle -->
+  <text x="470" y="36" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800">
+    batch-forensics-and-ghidra-re : بنية خط المعالجة
+  </text>
+  <text x="470" y="58" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+    تحليل جنائي ثلاثي الطبقات، محاكاة المفسر وإطار الكشف الأمني
+  </text>
+
+  <!-- 3 Big Tier Boxes -->
+  <!-- Box 1: Input -->
+  <g transform="translate(35, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#334155" stroke-width="1.2"/>
+    <rect width="270" height="34" rx="8" fill="#1e293b"/>
+    <rect y="26" width="270" height="8" fill="#1e293b"/>
+    <text x="135" y="22" text-anchor="middle" fill="#f59e0b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      1. طبقة التمويه وإدخال أدوات الحزم
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#fde68a">&bull; Invoke-DOSfuscation (اقتطاع متغيرات بيئة PowerShell)</text>
+      <text x="0" y="50" font-weight="bold" fill="#fde68a">&bull; BatCloak / BEncoder (تمويه ترويسة UTF-16LE BOM)</text>
+      <text x="0" y="100" font-weight="bold" fill="#fde68a">&bull; SomalifuscatorV2 / 0xidiz3r (تشفير قيصر / الصفر الحرفي)</text>
+      <text x="0" y="150" font-weight="bold" fill="#fde68a">&bull; مجمعات Bat2Exe (UPX, VB6, .NET CLR, Bytepress)</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(312, 202)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#38bdf8" stroke-width="2.5"/>
+    <polygon points="20,-5 28,0 20,5" fill="#38bdf8"/>
+  </g>
+
+  <!-- Box 2: Analysis -->
+  <g transform="translate(335, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#0284c7" stroke-width="1.5" filter="url(#boxGlow)"/>
+    <rect width="270" height="34" rx="8" fill="#075985"/>
+    <rect y="26" width="270" height="8" fill="#075985"/>
+    <text x="135" y="22" text-anchor="middle" fill="#e0f2fe" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      2. الهندسة العكسية عبر Ghidra ومحاكاة AST
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#38bdf8">&bull; فحص ملفات PE عبر Ghidra (bat2exe_12, BEDeCode, example.exe)</text>
+      <text x="0" y="50" font-weight="bold" fill="#38bdf8">&bull; المرحلة 1: التحقق من ترويسة BOM والترميز الهجين</text>
+      <text x="0" y="100" font-weight="bold" fill="#38bdf8">&bull; المرحلة 2: آلة حالة محرف الهروب Caret (IN_QUOTES)</text>
+      <text x="0" y="150" font-weight="bold" fill="#38bdf8">&bull; المراحل 3-5: الاقتطاع (%VAR:~o,l%)، ضبط الفواصل، التوسيع المؤجل !VAR!</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(612, 202)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#10b981" stroke-width="2.5"/>
+    <polygon points="20,-5 28,0 20,5" fill="#10b981"/>
+  </g>
+
+  <!-- Box 3: Detection -->
+  <g transform="translate(635, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#059669" stroke-width="1.5"/>
+    <rect width="270" height="34" rx="8" fill="#065f46"/>
+    <rect y="26" width="270" height="8" fill="#065f46"/>
+    <text x="135" y="22" text-anchor="middle" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      3. القياس الأمني لمنظومات SOC/EDR وقواعد الكشف
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#6ee7b7">&bull; تسجيل شذوذ إنتروبيا شانون وكثافة محارف Caret</text>
+      <text x="0" y="50" font-weight="bold" fill="#6ee7b7">&bull; قواعد Sigma: كشف اقتطاع متغيرات البيئة المشبوهة</text>
+      <text x="0" y="100" font-weight="bold" fill="#6ee7b7">&bull; قواعد YARA: بصمات التمويه وترويسات أقسام PE</text>
+      <text x="0" y="150" font-weight="bold" fill="#6ee7b7">&bull; مصفوفة MITRE: T1059.003, T1027.010, T1140</text>
+    </g>
+  </g>
+</svg>

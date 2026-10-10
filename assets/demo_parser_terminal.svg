@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#04060a"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .t-code { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; }
+      .c-green { fill: #10b981; }
+      .c-cyan  { fill: #38bdf8; }
+      .c-purple{ fill: #c084fc; }
+      .c-yellow{ fill: #fbbf24; }
+      .c-gray  { fill: #64748b; }
+      .c-white { fill: #f1f5f9; }
+
+      @keyframes fadeStep1 { 0%, 10% { opacity: 0; } 15%, 100% { opacity: 1; } }
+      @keyframes fadeStep2 { 0%, 25% { opacity: 0; } 30%, 100% { opacity: 1; } }
+      @keyframes fadeStep3 { 0%, 40% { opacity: 0; } 45%, 100% { opacity: 1; } }
+      @keyframes fadeStep4 { 0%, 55% { opacity: 0; } 60%, 100% { opacity: 1; } }
+      @keyframes fadeStep5 { 0%, 70% { opacity: 0; } 75%, 100% { opacity: 1; } }
+      @keyframes fadeSummary { 0%, 85% { opacity: 0; } 90%, 100% { opacity: 1; } }
+      @keyframes blinkCursor { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+      .step1 { animation: fadeStep1 8s infinite; }
+      .step2 { animation: fadeStep2 8s infinite; }
+      .step3 { animation: fadeStep3 8s infinite; }
+      .step4 { animation: fadeStep4 8s infinite; }
+      .step5 { animation: fadeStep5 8s infinite; }
+      .summary { animation: fadeSummary 8s infinite; }
+      .cursor { animation: blinkCursor 0.9s infinite; }
+    </style>
+  </defs>
+
+  <!-- Window Container -->
+  <rect width="880" height="440" rx="12" fill="url(#termBg)"/>
+  <rect x="0.5" y="0.5" width="879" height="439" rx="11.5" fill="none" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Window Header -->
+  <rect width="880" height="38" rx="12" fill="url(#headerGrad)"/>
+  <rect y="26" width="880" height="12" fill="url(#headerGrad)"/>
+  <circle cx="22" cy="19" r="6" fill="#ef4444"/>
+  <circle cx="42" cy="19" r="6" fill="#f59e0b"/>
+  <circle cx="62" cy="19" r="6" fill="#10b981"/>
+  <text x="440" y="24" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">
+    batch-forensics-and-ghidra-re &mdash; cmd_parser_simulator.py (Live Verification)
+  </text>
+
+  <!-- Terminal Content -->
+  <g transform="translate(30, 68)" class="t-code">
+    <!-- Prompt Line -->
+    <text x="0" y="0">
+      <tspan class="c-green" font-weight="bold">PS C:lab&gt;</tspan>
+      <tspan class="c-white"> python -m src.cmd_parser_simulator samples/parser-test-vectors/01_env_slicing_sample.bat</tspan>
+    </text>
+
+    <!-- Step 1: BOM -->
+    <g class="step1" transform="translate(0, 36)">
+      <text x="0" y="0">
+        <tspan class="c-cyan" font-weight="bold">[PHASE 1] BOM &amp; ENCODING DETECTOR:</tspan>
+        <tspan class="c-gray"> Analyzed header bytes [0x40 0x65 0x63 0x68]</tspan>
+      </text>
+      <text x="20" y="22" class="c-white">&gt;&gt; Encoding: <tspan class="c-green">UTF-8/ASCII Clean</tspan> (No BatCloak UTF-16LE 0xFF 0xFE disguise detected)</text>
+    </g>
+
+    <!-- Step 2: Caret State Machine -->
+    <g class="step2" transform="translate(0, 88)">
+      <text x="0" y="0">
+        <tspan class="c-cyan" font-weight="bold">[PHASE 2] CARET LEXER STATE MACHINE:</tspan>
+        <tspan class="c-gray"> Parsing escape states outside double quotes</tspan>
+      </text>
+      <text x="20" y="22" class="c-white">&gt;&gt; Raw Token   : <tspan class="c-yellow">s^e^t ^"v^a^r=d^e^f^e^n^s^e^"</tspan></text>
+      <text x="20" y="42" class="c-white">&gt;&gt; Caret State : <tspan class="c-green">IN_QUOTES=False</tspan> &rarr; Normalized: <tspan class="c-yellow">set "var=defense"</tspan></text>
+    </g>
+
+    <!-- Step 3: Env Slicing -->
+    <g class="step3" transform="translate(0, 160)">
+      <text x="0" y="0">
+        <tspan class="c-cyan" font-weight="bold">[PHASE 3] ENVIRONMENT VARIABLE RESOLVER:</tspan>
+        <tspan class="c-gray"> Resolving %PUBLIC:~offset,len% slices</tspan>
+      </text>
+      <text x="20" y="22" class="c-white">&gt;&gt; Evaluated   : <tspan class="c-purple">%PUBLIC:~4,1%</tspan> &rarr; <tspan class="c-green">'s'</tspan> | <tspan class="c-purple">%COMSPEC:~-7%</tspan> &rarr; <tspan class="c-green">'cmd.exe'</tspan></text>
+      <text x="20" y="42" class="c-white">&gt;&gt; Deobfuscated: <tspan class="c-green">echo Hello World - AST Pipeline Operational</tspan></text>
+    </g>
+
+    <!-- Step 4: Delimiter Normalization -->
+    <g class="step4" transform="translate(0, 232)">
+      <text x="0" y="0">
+        <tspan class="c-cyan" font-weight="bold">[PHASE 4] DELIMITER COLLAPSER:</tspan>
+        <tspan class="c-gray"> Stripping commas, semicolons, tabs [ , ; = 	 ]</tspan>
+      </text>
+      <text x="20" y="22" class="c-white">&gt;&gt; Normalized Argument Vector: <tspan class="c-yellow">[ 'cmd.exe', '/c', 'echo', 'Hello World' ]</tspan></text>
+    </g>
+
+    <!-- Summary & Scoring -->
+    <g class="summary" transform="translate(0, 284)">
+      <rect x="0" y="-8" width="820" height="58" rx="6" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="15">
+        <tspan class="c-yellow" font-weight="bold">[FORENSIC TELEMETRY] </tspan>
+        <tspan class="c-white">Shannon Entropy: </tspan><tspan class="c-green">5.1906</tspan>
+        <tspan class="c-white"> | Caret Density: </tspan><tspan class="c-cyan">0.0385</tspan>
+        <tspan class="c-white"> | Var Density: </tspan><tspan class="c-purple">0.0921</tspan>
+      </text>
+      <text x="15" y="38">
+        <tspan class="c-white">MITRE ATT&amp;CK Mapping: </tspan>
+        <tspan class="c-green">T1059.003 (Windows Command Shell)</tspan><tspan class="c-gray">, </tspan>
+        <tspan class="c-yellow">T1027.010 (Command Obfuscation)</tspan>
+      </text>
+    </g>
+
+    <!-- Blinking Cursor -->
+    <rect x="760" y="328" width="8" height="15" fill="#10b981" class="cursor"/>
+  </g>
+</svg>

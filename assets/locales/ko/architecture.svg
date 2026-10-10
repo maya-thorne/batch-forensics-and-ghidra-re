@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c16"/>
+      <stop offset="100%" stop-color="#04060a"/>
+    </linearGradient>
+    <linearGradient id="box1G" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141a29"/>
+      <stop offset="100%" stop-color="#0c121d"/>
+    </linearGradient>
+    <filter id="boxGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="940" height="380" rx="12" fill="url(#bgG)"/>
+  <rect x="0.5" y="0.5" width="939" height="379" rx="11.5" fill="none" stroke="#1e293b" stroke-width="1.2"/>
+
+  <!-- Title & Subtitle -->
+  <text x="470" y="36" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800">
+    batch-forensics-and-ghidra-re : 파이프라인 아키텍처
+  </text>
+  <text x="470" y="58" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+    3계층 포렌식 분해, 파서 시뮬레이션 및 방어 탐지 프레임워크
+  </text>
+
+  <!-- 3 Big Tier Boxes -->
+  <!-- Box 1: Input -->
+  <g transform="translate(35, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#334155" stroke-width="1.2"/>
+    <rect width="270" height="34" rx="8" fill="#1e293b"/>
+    <rect y="26" width="270" height="8" fill="#1e293b"/>
+    <text x="135" y="22" text-anchor="middle" fill="#f59e0b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      1. 난독화 기법 및 컴파일러 입력 계층
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#fde68a">&bull; Invoke-DOSfuscation (PowerShell 환경변수 슬라이싱)</text>
+      <text x="0" y="50" font-weight="bold" fill="#fde68a">&bull; BatCloak / BEncoder (UTF-16LE BOM 위장 기법)</text>
+      <text x="0" y="100" font-weight="bold" fill="#fde68a">&bull; SomalifuscatorV2 / 0xidiz3r (카이사르 / Zero-Literal)</text>
+      <text x="0" y="150" font-weight="bold" fill="#fde68a">&bull; Bat2Exe 컴파일러 (UPX, VB6, .NET CLR, Bytepress)</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(312, 202)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#38bdf8" stroke-width="2.5"/>
+    <polygon points="20,-5 28,0 20,5" fill="#38bdf8"/>
+  </g>
+
+  <!-- Box 2: Analysis -->
+  <g transform="translate(335, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#0284c7" stroke-width="1.5" filter="url(#boxGlow)"/>
+    <rect width="270" height="34" rx="8" fill="#075985"/>
+    <rect y="26" width="270" height="8" fill="#075985"/>
+    <text x="135" y="22" text-anchor="middle" fill="#e0f2fe" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      2. 기드라 MCP 바이너리 역공학 및 AST 시뮬레이션
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#38bdf8">&bull; 기드라 PE 트리아지 (bat2exe_12, BEDeCode, example.exe)</text>
+      <text x="0" y="50" font-weight="bold" fill="#38bdf8">&bull; 1단계: BOM 및 폴리글랏 인코딩 검증</text>
+      <text x="0" y="100" font-weight="bold" fill="#38bdf8">&bull; 2단계: 캐럿(^) 렉서 상태 머신 (IN_QUOTES)</text>
+      <text x="0" y="150" font-weight="bold" fill="#38bdf8">&bull; 3~5단계: 슬라이싱(%VAR:~o,l%), 구분자 정규화, 지연확장 !VAR!</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(612, 202)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#10b981" stroke-width="2.5"/>
+    <polygon points="20,-5 28,0 20,5" fill="#10b981"/>
+  </g>
+
+  <!-- Box 3: Detection -->
+  <g transform="translate(635, 82)">
+    <rect width="270" height="260" rx="8" fill="url(#box1G)" stroke="#059669" stroke-width="1.5"/>
+    <rect width="270" height="34" rx="8" fill="#065f46"/>
+    <rect y="26" width="270" height="8" fill="#065f46"/>
+    <text x="135" y="22" text-anchor="middle" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">
+      3. SOC/EDR 방어 텔레메트리 및 탐지 규칙 계층
+    </text>
+
+    <g transform="translate(14, 54)" font-family="Consolas, monospace" font-size="11.5" fill="#cbd5e1">
+      <text x="0" y="0" font-weight="bold" fill="#6ee7b7">&bull; 섀넌 엔트로피 및 캐럿 밀도 이상치 스코어링</text>
+      <text x="0" y="50" font-weight="bold" fill="#6ee7b7">&bull; Sigma 룰: 명령줄 환경변수 슬라이싱 이상 징후</text>
+      <text x="0" y="100" font-weight="bold" fill="#6ee7b7">&bull; YARA 룰: 난독화 문자열 시그니처 및 PE 섹션 매칭</text>
+      <text x="0" y="150" font-weight="bold" fill="#6ee7b7">&bull; MITRE ATT&amp;CK: T1059.003, T1027.010, T1140</text>
+    </g>
+  </g>
+</svg>
