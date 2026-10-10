@@ -19,7 +19,7 @@
 [![References](https://img.shields.io/badge/References-41_Mirrors-818cf8.svg)](../../references)
 [![Tests](https://img.shields.io/badge/Tests-100%25_Passing-10b981.svg)](../../tests)
 [![Rules](https://img.shields.io/badge/Rules-Sigma_%26_YARA-f59e0b.svg)](../../rules)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../../LICENSE)
+[![License: MT-SRL](https://img.shields.io/badge/License-MT--SRL-blue.svg)](../../LICENSE)
 
 <sub>Engineered &amp; Audited by **[Maya Thorne](https://github.com/maya-thorne)** · Systems &amp; Reverse Engineering Research</sub>
 
@@ -31,6 +31,14 @@
 
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/architecture.svg" alt="architecture diagram" width="100%" /></a>
+</p>
+
+---
+
+## 🏗️ Конвейер обнаружения Blue Team EDR/SIEM (Detection Pipeline)
+
+<p align="center">
+  <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
 
 ---
