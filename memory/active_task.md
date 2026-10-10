@@ -16,8 +16,9 @@
   - 섀넌 엔트로피 및 비정상 캐럿 밀도 스코어링 모듈 (`src/entropy_detector.py`) 및 애니메이션 터미널 데모 SVG 완비.
 
 - [x] **4. GitHub 공식 Release 및 Git Tag (`v1.0.0` / `v1.1.0`) 발행**:
-  - Git Tag 생성 및 원격 푸시 완료.
-  - EDR/SOC 탐지 룰셋 패키지(52 Sigma / 32 YARA), 테스트 벡터 검증 결과, 릴리즈 노트 등록 완료.
+  - Git Tag `v1.0.0` 및 `v1.1.0` 생성 및 원격 푸시 완료.
+  - GitHub Release `v1.0.0` 및 `v1.1.0` (Enterprise Blue Team Detection Engineering Suite - 52 Sigma / 32 YARA) 공식 발행 완료.
+  - EDR/SOC 탐지 룰셋 패키지, 테스트 벡터 검증 결과, 릴리즈 노트 등록 완료.
 
 - [x] **5. 라이선스(LICENSE) 규격화 및 오픈소스 크레딧**:
   - 공식 LICENSE (MIT License) 완비 및 관제 룰셋 활용 시 방어 연구 면책 조항 명시.
