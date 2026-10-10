@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.exe
+*.dll
+*.pdb
+*.obj
+*.bin
+*.iso
+*.zip
+*.7z
+*.rar
+.DS_Store
+Thumbs.db
