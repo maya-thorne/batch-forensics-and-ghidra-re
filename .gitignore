@@ -1,7 +1,10 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
+
+# Binary executables and library dumps
 *.exe
 *.dll
 *.pdb
@@ -11,5 +14,29 @@ __pycache__/
 *.zip
 *.7z
 *.rar
+
+# Environment files and credentials (Zero-Leak Security Invariant)
+.env
+.env.*
+*.env
+*.token
+*.key
+*.pem
+credentials.json
+
+# Operating System temporary and index files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Logs and runtime debugging output
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules and temporary scratch artifacts
+node_modules/
+.cache/
+.temp/
+*.tmp
