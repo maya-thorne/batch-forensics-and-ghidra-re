@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : Arquitetura da Pipeline (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ Ver Arquitetura do Sistema (Clique para recolher/expandir)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/pt-BR/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ Pipeline de Detecção EDR/SIEM Blue Team (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ Ver Pipeline de Detecção EDR/SIEM (Clique para recolher/expandir)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/pt-BR/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 Ver Simulador de Terminal Interativo (Clique para recolher/expandir)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : بنية خط المعالجة (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ عرض المعمارية وطوبولوجيا النظام (انقر للطي/التوسيع)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ar/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ خط أنابيب الكشف EDR/SIEM للفريق الأزرق (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ عرض مسار كشف EDR و SIEM (انقر للطي/التوسيع)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ar/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 عرض العرض التوضيحي للطرفية التفاعلية (انقر للطي/التوسيع)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

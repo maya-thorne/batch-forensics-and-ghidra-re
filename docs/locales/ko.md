@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : 파이프라인 아키텍처 (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ 시스템 아키텍처 및 토폴로지 열기/닫기 (클릭하여 접기/펼치기)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ko/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ 블루팀 EDR/SIEM 탐지 파이프라인 (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ 블루팀 EDR/SIEM 탐지 파이프라인 열기/닫기 (클릭하여 접기/펼치기)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ko/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 대화형 파서 시뮬레이터 시연 열기/닫기 (클릭하여 접기/펼치기)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

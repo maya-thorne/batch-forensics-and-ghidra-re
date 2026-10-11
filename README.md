@@ -92,9 +92,14 @@ flowchart LR
 
 ## 💻 Interactive Parser Simulator Live Demo
 
+<details open>
+<summary><b>💻 View Interactive Parser Simulator Live Demo (Click to collapse/expand)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

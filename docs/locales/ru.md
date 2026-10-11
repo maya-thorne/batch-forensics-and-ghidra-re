@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : Архитектура конвейера (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ Показать Архитектуру Системы (Нажмите чтобы скрыть/раскрыть)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ Конвейер обнаружения Blue Team EDR/SIEM (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ Показать Конвейер Обнаружения EDR/SIEM (Нажмите чтобы скрыть/раскрыть)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/ru/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 Показать Демонстрацию в Терминале (Нажмите чтобы скрыть/раскрыть)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

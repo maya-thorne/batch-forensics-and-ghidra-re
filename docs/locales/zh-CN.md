@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : 架构流水线 (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ 系统架构与拓扑结构展开/折叠 (点击切换)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/zh-CN/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ 蓝队 EDR/SIEM 威胁检测管道 (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ 蓝队 EDR/SIEM 检测流水线展开/折叠 (点击切换)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/zh-CN/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 交互式解析器模拟终端展开/折叠 (点击切换)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 

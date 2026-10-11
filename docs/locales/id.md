@@ -29,25 +29,40 @@
 
 ## 🎨 batch-forensics-and-ghidra-re : Arsitektur Jalur Analisis (Local Architecture Diagram)
 
+<details open>
+<summary><b>🏛️ Lihat Arsitektur Sistem & Topologi (Klik untuk menutup/membuka)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/id/architecture.svg" alt="architecture diagram" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 🏗️ Pipeline Deteksi EDR/SIEM Blue Team (Detection Pipeline)
 
+<details open>
+<summary><b>🏗️ Lihat Pipeline Deteksi EDR/SIEM (Klik untuk menutup/membuka)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/locales/id/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
+</details>
 
 ---
 
 ## 💻 Interactive Terminal Demonstration Asset
 
+<details open>
+<summary><b>💻 Lihat Demonstrasi Simulator Terminal (Klik untuk menutup/membuka)</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="../assets/demo_parser_terminal.svg" alt="Terminal Demo" width="100%" /></a>
 </p>
+</details>
 
 ---
 
