@@ -43,6 +43,10 @@ This repository is an **enterprise-grade defensive security engineering lab and 
 
 ## 🏗️ Blue Team EDR/SIEM Detection Pipeline
 
+<details open>
+<summary><b>🏗️ View Blue Team EDR/SIEM Detection Pipeline &amp; Topology Diagrams</b></summary>
+<br>
+
 <p align="center">
   <a href="https://github.com/maya-thorne/batch-forensics-and-ghidra-re"><img src="./docs/assets/detection_pipeline.svg" alt="Detection Pipeline" width="100%" /></a>
 </p>
@@ -82,6 +86,7 @@ flowchart LR
     N1 & N2 & N3 & N4 --> R1 & R2 & R3
     R1 & R2 & R3 --> A1 --> A2
 ```
+</details>
 
 ---
 
@@ -94,6 +99,10 @@ flowchart LR
 ---
 
 ## 🛡️ Rule Suite Architecture (52 Sigma & 32 YARA)
+
+<details open>
+<summary><b>🛡️ View 52 Modular Sigma Rules &amp; 32 Modular YARA Rules Inventory</b></summary>
+<br>
 
 ### 1. Modular Sigma Rules Breakdown (`rules/sigma/`)
 - 📁 **[defense_evasion/](./rules/sigma/defense_evasion/) (24 Rules)**:
@@ -126,10 +135,15 @@ flowchart LR
   - Bat2Exe UPX native containers, VB6 `ThunRTMain` stubs, .NET CLR resource unpackers, Bytepress LZMA RangeCoder decompressors, F2KO software converters, and PE overlay XOR stubs.
 - 📁 **[heuristics/](./rules/yara/heuristics/) (10 Rules)**:
   - High caret density, excessive variable slicing, Certutil hex decode chains, reversed FOR loop reconstruction, delimiter collapsing, dynamic substitution tables, anti-VM hardware fingerprinting, Shannon entropy thresholds, PowerShell download cradles, and in-memory AMSI/ETW byte patching.
+</details>
 
 ---
 
 ## ⚡ Instant SIEM Query Deployment
+
+<details>
+<summary><b>⚡ View Splunk SPL &amp; Elasticsearch KQL Production Queries</b></summary>
+<br>
 
 ### Splunk SPL Snippet (`rules/siem_queries/splunk_queries.spl`)
 ```spl
@@ -142,10 +156,15 @@ index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" E
 ```kql
 event.category: "process" and process.name: "cmd.exe" and process.command_line: /.*(%[a-zA-Z0-9_]+:~[0-9]+,1%){3,}.*/
 ```
+</details>
 
 ---
 
 ## 🔬 Statistical Anomaly Scorer & Tests
+
+<details open>
+<summary><b>🔬 View Automated Tests &amp; Anomaly Scorer Execution</b></summary>
+<br>
 
 ```bash
 # Run the automated unit tests verifying the anomaly scorer and parser simulator
@@ -163,10 +182,15 @@ print(f"Threat Level    : {result.threat_level}")
 print(f"Composite Score : {result.composite_threat_score}/100.0")
 print(f"Anomalies       : {result.triggered_anomalies}")
 ```
+</details>
 
 ---
 
 ## 📁 Repository Directory Structure
+
+<details>
+<summary><b>📁 View Repository Directory Tree &amp; Component Inventory</b></summary>
+<br>
 
 ```text
 batch-forensics-and-ghidra-re/
@@ -184,10 +208,10 @@ batch-forensics-and-ghidra-re/
 │   ├── samples/                                 # 6 benign educational test vectors
 │   ├── test_entropy_detector.py                 # Anomaly scoring test suite
 │   └── test_cmd_parser_simulator.py             # AST simulator test suite
-├── memory/                                      # Worker context and task records
 ├── LICENSE                                      # Maya Thorne Systems & Security Research License (MT-SRL)
 └── README.md                                    # Root bilingual research overview
 ```
+</details>
 
 ---
 
